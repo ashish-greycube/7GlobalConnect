@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include 7globalconnect *.css
+recursive-include 7globalconnect *.csv
+recursive-include 7globalconnect *.html
+recursive-include 7globalconnect *.ico
+recursive-include 7globalconnect *.js
+recursive-include 7globalconnect *.json
+recursive-include 7globalconnect *.md
+recursive-include 7globalconnect *.png
+recursive-include 7globalconnect *.py
+recursive-include 7globalconnect *.svg
+recursive-include 7globalconnect *.txt
+recursive-exclude 7globalconnect *.pyc
