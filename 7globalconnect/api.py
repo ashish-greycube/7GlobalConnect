@@ -16,7 +16,7 @@ import os
 # from datetime import datetime, timedelta
 # from frappe.utils.background_jobs import enqueue
 
-@frappe.whitelist(allow_guest=True)
+@frappe.whitelist()
 def getcomission(sales_person , from_date, to_date):
     return frappe.db.sql("""SELECT
                             sum(total_commission)
@@ -28,4 +28,4 @@ def getcomission(sales_person , from_date, to_date):
                             ST.sales_person =  %s and ifnull(ST.allocated_percentage,0) = 100
                             and SI.posting_date >= %s and posting_date <= %s
                             and SI.status='Paid'
-                            and ifnull(SI.base_net_total, 0) > 0 and ifnull(SI.total_commission, 0) > 0""",sales_person,from_date,to_date, as_dict=1) or 0
+                            and ifnull(SI.base_net_total, 0) > 0 and ifnull(SI.total_commission, 0) > 0""",(sales_person,from_date,to_date), as_dict=1) or 0
