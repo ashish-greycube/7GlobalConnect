@@ -120,3 +120,13 @@ app_license = "MIT"
 # 	"frappe.desk.doctype.event.event.get_events": "7globalconnect.event.get_events"
 # }
 
+fixtures = [
+    	{
+		"dt":"Custom Script",
+		"filters":[
+			["name", "in", [
+			"Domain Registration-Client","Sales Invoice-Client","Job Order-Client"]],
+		]
+	}       	
+
+]
