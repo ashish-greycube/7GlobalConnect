@@ -24,7 +24,8 @@ frappe.ui.form.on("CP58 Statement", {
             callback: function (r) {
                 if (r.message) {
                     data = r.message
-                    console.log(data)
+                    console.log(data.Commission)
+                    frm.doc.total_commission=data.Commission
                 }
             }
         });

@@ -19,7 +19,7 @@ import os
 @frappe.whitelist()
 def getcomission(sales_person , from_date, to_date):
     return frappe.db.sql("""SELECT
-                            sum(total_commission)
+                            sum(total_commission) as commission
                             FROM
                             `tabSales Invoice` AS SI
                             INNER JOIN `tabSales Team` AS ST
