@@ -13,32 +13,30 @@ frappe.ui.form.on("Sales Invoice", {
 
 
         frm.add_fetch("item_code", commission_type_map[frm.doc.commission_type], "commission_rate");
-
-
-        let items = $.map(frm.doc.items, function (i) { return i.item_code });
-        frappe.call({
-            method: "frappe.client.get_list",
-            args: {
-                doctype: "Item",
-                filters: {
-                    "item_code": ["in", items.join(', ')],
+            let items = $.map(frm.doc.items, function (i) { return i.item_code });
+            frappe.call({
+                method: "frappe.client.get_list",
+                args: {
+                    doctype: "Item",
+                    filters: {
+                        "item_code": ["in", items.join(', ')],
+                    },
+                    fields: ["initial_sales_commission", "yearly_renewal_commission", "referral_fees", "item_code"],
                 },
-                fields: ["initial_sales_commission", "yearly_renewal_commission", "referral_fees", "item_code"],
-            },
-        }).then(function (r) {
-            console.log(r);
-            let total_commission = 0;
-            let total_base_net = 0;
-            for (let d of frm.doc.items) {
-                let item = r.message.filter(function (i) { return i.item_code == d.item_code });
-                d.commission_rate = flt(item[0][commission_type_map[frm.doc.commission_type]]);
-                total_commission += flt(d.base_net_amount) * flt(d.commission_rate / 100);
-                total_base_net +=flt(d.base_net_amount)
-            }
-            frm.refresh_field("items");
-            frm.set_value("total_commission", total_commission);
-            frm.set_value("commission_rate",flt((total_commission/total_base_net)*100,1));
-        });
+            }).then(function (r) {
+                if (r.message) {
+                    let total_commission = 0;
+                    let total_base_net = 0;
+                    for (let d of frm.doc.items) {
+                        let item = r.message.filter(function (i) { return i.item_code == d.item_code });
+                        d.commission_rate = flt(item[0][commission_type_map[frm.doc.commission_type]]);
+                        total_commission += flt(d.base_net_amount) * flt(d.commission_rate / 100);
+                        total_base_net +=flt(d.base_net_amount)
+                    }
+                    frm.refresh_field("items");
+                    frm.set_value("total_commission", total_commission);
+                    frm.set_value("commission_rate",flt((total_commission/total_base_net)*100,1));                    
+                }
+            });
     }
-
 });
