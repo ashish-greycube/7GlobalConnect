@@ -1,6 +1,19 @@
+frappe.ui.form.on('Sales Invoice Item', {
+    item_code: function(frm,cdt,cdn) {
+        // do your stuff
+        frm.trigger('set_items_commission_rate');
+    }
+});
+
 
 frappe.ui.form.on("Sales Invoice", {
     commission_type: function (frm, cdt, cdn) {
+        frm.trigger('set_items_commission_rate');
+    },
+    validate: function (frm, cdt, cdn) {
+        frm.trigger('set_items_commission_rate');
+    },
+    items_add: function (frm, cdt, cdn) {
         frm.trigger('set_items_commission_rate');
     },
 
