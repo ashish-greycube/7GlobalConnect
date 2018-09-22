@@ -17,6 +17,18 @@ frappe.ui.form.on("CP58 Statement", {
                 }
             }
         });
+        frappe.call({
+            "method": "7globalconnect.sevenglobalconnect.doctype.cp58_statement.cp58_statement.get_company_address",
+            args: {
+                company: frm.doc.company
+            },
+            callback: function (r) {
+                console.log(r)
+                data=r.message
+                if (data) {
+                }
+            }
+        });
 
     },
     payer_officer_emp_id: function (frm) {
