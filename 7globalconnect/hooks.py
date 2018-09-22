@@ -125,7 +125,7 @@ fixtures = [
 		"dt":"Custom Script",
 		"filters":[
 			["name", "in", [
-			"Domain Registration-Client","Sales Invoice-Client","Job Order-Client"]],
+			"Domain Registration-Client","Sales Invoice-Client","Job Order-Client","CP58 Statement-Client"]],
 		]
 	}       	
 
