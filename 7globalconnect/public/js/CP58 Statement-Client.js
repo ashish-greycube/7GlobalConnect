@@ -23,9 +23,10 @@ frappe.ui.form.on("CP58 Statement", {
                 company: frm.doc.company
             },
             callback: function (r) {
-                console.log(r)
-                data=r.message
+                data=r.message[0]
                 if (data) {
+                    company_address=data.address_line1+"\n"+data.address_line2+"\n"+data.city+"\n"+data.pincode+"\n"+data.country
+                    frm.set_value("company_address",company_address)
                 }
             }
         });
@@ -43,7 +44,6 @@ frappe.ui.form.on("CP58 Statement", {
             },
         }).then(function (r) {
             if (r.message) {
-                console.log(r.message)
                 frm.set_value("officer_name", r.message.employee_name)
                 frm.set_value("officer_passport", r.message.passport_number)
                 frm.set_value("officer_designation", r.message.designation)
@@ -64,7 +64,6 @@ frappe.ui.form.on("CP58 Statement", {
             },
         }).then(function (r) {
             if (r.message) {
-                console.log(r.message)
                 frm.set_value("sales_person_email", r.message.prefered_email)
                 frm.set_value("sales_person_address", r.message.permanent_address)
                 frm.set_value("sales_person_passport", r.message.passport_number)
@@ -105,7 +104,6 @@ frappe.ui.form.on("CP58 Statement", {
             callback: function (r) {
                 if (r.message) {
                     data = r.message
-                    console.log(data)
                     if (data[0].commission) {
                         frm.doc.total_commission = data[0].commission
                     } else {
@@ -116,6 +114,14 @@ frappe.ui.form.on("CP58 Statement", {
                 }
             }
         });
+
+    },
+    validate: function (frm) {
+
+                // var msg = "Please fill mandotory fields in respective doctypes";
+                // msgprint(msg);
+                // throw msg;
+
 
     }
 
