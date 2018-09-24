@@ -11,6 +11,11 @@ frappe.ui.form.on("Domain Registration", {
         frm.add_fetch("sales_order", "contact_display", "contact_display");
         frm.add_fetch("sales_order", "contact_email", "contact_email");
         frm.add_fetch("sales_order", "transaction_date", "purchase_date");
+       
+        frm.set_value("sales_person", '')
+        frm.set_value("employee", '')
+        frm.set_value("prefered_email",'')
+        frm.set_value("sales_person_cell", '')
 
         frappe.call({
             method: '7globalconnect.sevenglobalconnect.doctype.domain_registration.domain_registration.get_sales_person_for_sales_order',
@@ -29,6 +34,27 @@ frappe.ui.form.on("Domain Registration", {
     },
     purchase_date: function (frm) {
         frm.set_value("expiry_date", frappe.datetime.add_months(frm.doc.purchase_date, 12));
+    },
+    sales_person: function (frm) {
+        frappe.call({
+            method: 'frappe.client.get_value',
+            args: {
+                'doctype': 'Sales Person',
+                'filters': {
+                    'name': frm.doc.sales_person
+                },
+                'fieldname': ['employee']
+            },
+            callback: function (r) {
+                if (!r.exc) {
+                    if (r.message) {
+                        data=r.message
+                        frm.set_value("employee", data.employee)
+                    }
+                }
+            }
+        })
+
     },
     employee: function (frm) {
         frappe.call({
