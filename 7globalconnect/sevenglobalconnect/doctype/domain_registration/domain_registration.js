@@ -19,8 +19,8 @@ frappe.ui.form.on("Domain Registration", {
             },
             callback: function (r) {
                 if (r.message) {
-                    data = r.message
-                    frm.set_value("sales_person", r.message.sales_person)
+                    data = r.message[0]
+                    frm.set_value("sales_person", data.sales_person)
                 }
             }
         });
