@@ -1,5 +1,17 @@
 // Copyright (c) 2018, GreyCube Technologies and contributors
 // For license information, please see license.txt
+cur_frm.add_fetch("sales_order", "customer", "customer");
+cur_frm.add_fetch("sales_order", "customer_name", "customer_name");
+cur_frm.add_fetch("sales_order", "customer_address", "customer_address");
+cur_frm.add_fetch("sales_order", "address_display", "address_display");
+cur_frm.add_fetch("sales_order", "contact_person", "contact_person");
+cur_frm.add_fetch("sales_order", "contact_mobile", "contact_mobile");
+cur_frm.add_fetch("sales_order", "contact_display", "contact_display");
+cur_frm.add_fetch("sales_order", "contact_email", "contact_email");
+cur_frm.add_fetch("sales_order", "transaction_date", "purchase_date");
+
+
+
 frappe.ui.form.on("Domain Registration", {
     sales_order: function (frm) {
         frm.add_fetch("sales_order", "customer", "customer");
