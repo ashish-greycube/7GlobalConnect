@@ -1,0 +1,28 @@
+{
+ "add_total_row": 1, 
+ "apply_user_permissions": 1, 
+ "creation": "2018-09-17 21:56:28.748125", 
+ "disabled": 0, 
+ "docstatus": 0, 
+ "doctype": "Report", 
+ "idx": 0, 
+ "is_standard": "Yes", 
+ "letter_head": "Letterhead for QT/SO/IN", 
+ "modified": "2018-09-22 18:12:26.392684", 
+ "modified_by": "Administrator", 
+ "module": "SevenGlobalConnect", 
+ "name": "Sales Person Commission", 
+ "owner": "Administrator", 
+ "query": "SELECT\n    ST.sales_person as \"Sales Person:Link/Sales Person:150\",\n\tSI.commission_type AS \"Commission Type:Data:150\",\n\tsum(base_net_total) as \"Invoiced Amount (Excluding Tax):Currency:210\",\n\tsum(total_commission) as \"Total Commission:Currency:150\",\n\tcommission_rate as \"Average Commission Rate (Percent):Float:250\"\nFROM\n\t`tabSales Invoice` AS SI \nINNER JOIN `tabSales Team` AS ST\non ST.parent = SI.name\nAND ifnull(ST.allocated_percentage,0) = 100\nWHERE\n\t ifnull(SI.base_net_total, 0) > 0 and ifnull(SI.total_commission, 0) > 0\n\t\nGROUP BY\n\tsales_person\nORDER BY\n\t\"Total Commission:Currency:120\"", 
+ "ref_doctype": "Sales Invoice", 
+ "report_name": "Sales Person Commission", 
+ "report_type": "Query Report", 
+ "roles": [
+  {
+   "role": "Accounts Manager"
+  }, 
+  {
+   "role": "Accounts User"
+  }
+ ]
+}
