@@ -7,7 +7,8 @@ frappe.query_reports["Sales Person Itemwise Commission"] = {
 			"fieldname":"sales_person",
 			"label": __("Sales Person"),
 			"fieldtype": "Link",
-			"options": "Sales Person"
+			"options": "Sales Person",
+			"reqd": 1
 		},
 		{
 			"fieldname":"from_date",
