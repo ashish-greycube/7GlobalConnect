@@ -1,0 +1,28 @@
+{
+ "add_total_row": 1, 
+ "apply_user_permissions": 1, 
+ "creation": "2018-09-25 13:12:25.630147", 
+ "disabled": 0, 
+ "docstatus": 0, 
+ "doctype": "Report", 
+ "idx": 0, 
+ "is_standard": "Yes", 
+ "letter_head": "Letterhead for QT/SO/IN", 
+ "modified": "2018-09-25 13:12:31.075988", 
+ "modified_by": "Administrator", 
+ "module": "SevenGlobalConnect", 
+ "name": "Test Report 7 global delete", 
+ "owner": "Administrator", 
+ "query": "SELECT\n                                                sum(SI.total_commission)\n                FROM\n                `tabSales Invoice` AS SI\nINNER JOIN `tabSales Team` AS ST\non ST.parent = SI.name\nWHERE\nST.sales_person =  \"Mary Chai\" and ifnull(ST.allocated_percentage,0) = 100\nAND SI.posting_date >= \"2018-09-01\" and SI.posting_date <= \"2018-09-30\"\nand SI.status=\"Paid\"\nand ifnull(SI.base_net_total, 0) > 0\nand ifnull(SI.total_commission, 0) > 0\n", 
+ "ref_doctype": "CP58 Statement", 
+ "report_name": "Test Report 7 global delete", 
+ "report_type": "Query Report", 
+ "roles": [
+  {
+   "role": "System Manager"
+  }, 
+  {
+   "role": "Sales User"
+  }
+ ]
+}
