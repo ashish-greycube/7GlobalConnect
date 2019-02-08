@@ -37,7 +37,7 @@ frappe.ui.form.on("Sales Invoice", {
                     fields: ["initial_sales_commission", "yearly_renewal_commission", "referral_fees", "item_code"],
                 },
             }).then(function (r) {
-                if (r.message) {
+                if (r.message.length>0) {
                     let total_commission = 0;
                     let total_base_net = 0;
                     for (let d of frm.doc.items) {
